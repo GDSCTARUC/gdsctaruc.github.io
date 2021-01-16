@@ -11,6 +11,11 @@ html{
     cursor: pointer;
 }
 
+.navbar-brand{
+    width: 50px;
+    margin: 0;
+}
+
 .dsc-body{
     position: relative;
 }
@@ -156,6 +161,15 @@ footer{
     bottom: 12px;
 }
 
+.footer-discord{
+    position: relative;
+    top: 2px;
+}
+
+.about-text h2, .whatwedo-title h2{
+    text-align: center;
+}
+
 @media (min-width:750px)
 {
     .about-photo img
@@ -181,6 +195,10 @@ footer{
 
     .dsc-contact-medias{
         padding: 0 10%;
+    }
+
+    .about-text h2, .whatwedo-title h2{
+        text-align: left;
     }
 }
 
