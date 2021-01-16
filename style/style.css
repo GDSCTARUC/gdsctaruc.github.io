@@ -1,0 +1,204 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+html{
+    scroll-behavior: smooth;
+}
+
+.nav-link{
+    cursor: pointer;
+}
+
+.dsc-body{
+    position: relative;
+}
+
+.dsc-body{
+    width: 100%;
+    min-height: 300px;
+    background-image: url(../images/blue-maize-pencils-teaser-1090x681.jpg);
+    background-position:center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.dsc-banner-text
+{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    width: 100%;
+}
+
+#body-banner{
+    opacity: 0;
+    max-width: 900px;
+}
+
+.dsc-aboutus
+{
+    width: 100%;
+    padding:40px;
+    position: relative;
+}
+
+.about-photo
+{
+    width: 100%;
+}
+
+.about-photo img
+{
+    width: 100%;
+}
+
+.dsc-whatwedo{
+    width: 100%;
+    background-color: rgb(254, 255, 210);
+    margin: 0!important;
+    padding: 40px;
+}
+
+.whatwedo-img img
+{
+    max-width: 500px;
+    width: 100%;
+}
+
+.whatwedo-title{
+    padding-bottom: 40px;
+}
+
+.dsc-container{
+    width: 100%;
+}
+
+footer{
+    padding: 15px;
+    width: 100%;
+    background-color: rgb(70, 69, 69);
+}
+
+#footer-logo{
+    max-width: 40px;
+    width: 100%;
+}
+
+#logo-col{
+    text-align: center;
+}
+
+.media-icons{
+    font-size: 50px;
+    cursor: pointer;
+}
+
+.media-icons:hover{
+    text-decoration: none;
+}
+
+.dsc-social-media .media-icons
+{
+    color: white;
+    opacity: 0.5;
+    font-size: 30px;
+}
+
+.media-icons:hover{
+    opacity: 1;
+}
+
+.our-team{
+    min-height: 500px;
+    background-color: rgb(255, 255, 255);
+    padding: 20px;
+}
+
+.member-photo img{
+    max-width: 250px;
+    max-height: 250px;
+    width: 100%;
+}
+
+.member-row{
+    margin-top: 40px;
+}
+
+.get-in-touch{
+    background-color: rgb(254, 255, 210);
+    padding: 40px;
+}
+
+.contact-input{
+    padding: 40px;
+    background-color: white;
+    margin-bottom: 20px;
+}
+
+.dsc-contact-medias ul{
+    list-style: none;
+}
+
+.dsc-contact-medias ul li a{
+    color: black!important;
+}
+
+.dsc-contact-medias ul li a:hover{
+    text-decoration: none;
+}
+
+.contact-text{
+    position: relative;
+    bottom: 12px;
+}
+
+@media (min-width:750px)
+{
+    .about-photo img
+    {
+        width: 380px;
+    }
+
+    #logo-col{
+        text-align: left;
+    }
+
+    .whatwedo-container{
+        padding: 40px;
+    }
+
+    .contact-container{
+        padding: 0 5%;
+    }
+
+    .whatwedo-title{
+        padding: 40px;
+    }
+
+    .dsc-contact-medias{
+        padding: 0 10%;
+    }
+}
+
+@media (min-width: 1050px)
+{
+    .about-photo img
+    {
+        width: 100%;
+    }
+
+    .about-text{
+        padding: 40px;
+    }
+}
+
+@media (min-width: 1920px)
+{
+    .dsc-aboutus{
+        padding: 0 5%;
+    }
+}

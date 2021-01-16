@@ -1,0 +1,29 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+.login-body{
+    background-color: rgb(226, 222, 222);
+    width: 100%;
+    min-height: 100vh;
+    position: relative;
+}
+
+.login-container{
+    width: 90%;
+    min-height: 300px;
+    background-color: white;
+    padding: 20px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+@media (min-width: 850px)
+{
+    .login-container{
+        width: 50%;
+    }
+}
