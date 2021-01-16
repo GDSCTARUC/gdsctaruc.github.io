@@ -131,7 +131,7 @@ function formSubmit() {
             minute=checkTime(minute);
             second=checkTime(second);
             
-            date = dt + "-" + mth + "-" + yr + " ," + hour + ":" + minute + ":" + second;
+            date = dt + "-" + mth + "-" + yr + ", " + hour + ":" + minute + ":" + second;
             
             firebase.database().ref("contact_details/").push({
                 Date : date,
