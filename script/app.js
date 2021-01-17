@@ -142,7 +142,7 @@ function formSubmit() {
             });
 
             // Set Cookies
-            setMessageCookie("send-message", "sent", 1);
+            setMessageCookie("dsc-contact", "sent", 1);
 
             alert("Form submitted we will approach you shortly!");
 
@@ -213,19 +213,27 @@ function displayRecord()
     record_count = 0;
     loader = document.getElementById("loader");
 
+    // Record array
+    two_dimension_record_array = [];
+    record_array = [];
+
+
     // Retrieve Data from the database
     firebase.database().ref("contact_details").once("value", function(snapshot){
         snapshot.forEach(function(childSnapshot){
             
-            // Print record
-            record_container.innerHTML = record_container.innerHTML +
-            "<tr>" +
-                "<td>" + childSnapshot.val().Date + "</td>" +
-                "<td>" + childSnapshot.val().FirstName + "</td>" +
-                "<td>" + childSnapshot.val().LastName + "</td>" +
-                "<td>" + childSnapshot.val().Email + "</td>" +
-                "<td>" + childSnapshot.val().Message + "</td>" +       
-            "</tr>";
+            // Insert record into the array
+            record_array.push(childSnapshot.val().Date);
+            record_array.push(childSnapshot.val().FirstName);
+            record_array.push(childSnapshot.val().LastName);
+            record_array.push(childSnapshot.val().Email);
+            record_array.push(childSnapshot.val().Message);
+
+            // Insert record into the 2d array
+            two_dimension_record_array.push(record_array);
+
+            // Clear the 1d array
+            record_array = [];
 
             // Add record count
             record_count++;
@@ -249,6 +257,22 @@ function displayRecord()
         }
         else
         {
+            // Reverse the array to show the latest record
+            two_dimension_record_array.reverse();
+
+            // Print record
+            for(row = 0; row < two_dimension_record_array.length; row++)
+            {
+                record_container.innerHTML = record_container.innerHTML +
+                "<tr>" +
+                    "<td>" + two_dimension_record_array[row][0] + "</td>" +
+                    "<td>" + two_dimension_record_array[row][1] + "</td>" +
+                    "<td>" + two_dimension_record_array[row][2] + "</td>" +
+                    "<td>" + two_dimension_record_array[row][3] + "</td>" +
+                    "<td>" + two_dimension_record_array[row][4] + "</td>" +       
+                "</tr>";
+            }
+
             // Remove loader
             document.getElementById("loader").style.display = "none";
         }
@@ -286,7 +310,7 @@ function getCookie(cname) {
 
 function checkMessageCookie() {
 
-  var user = getCookie("send-message");
+  var user = getCookie("dsc-contact");
 
   if (user != "") {
     return true;
