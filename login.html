@@ -68,7 +68,13 @@
                 <span class="text-danger" id="error-prompt"></span>
               </div>
 
-              <button type="button" class="btn btn-primary" onclick="login()">Login</button>
+              <div class="form-group">
+                <button type="button" class="btn btn-primary" onclick="login()">Login</button>
+                <div class="mt-2" id="login-loader" style="display: none;">
+                  <span class="spinner-border spinner-border-sm mr-1 ml-1 text-primary" role="status" aria-hidden="true"></span>Loading...    
+                </div>
+              </div>
+              
         </div>
     </div>
 </body>

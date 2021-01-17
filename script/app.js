@@ -164,9 +164,16 @@ function login()
     email = document.getElementById("email").value;
     password = document.getElementById("password").value;
     error_prompt = document.getElementById("error-prompt");
+    login_loader = document.getElementById("login-loader");
+
+    // Show the loader
+    login_loader.style.display = "";
 
     if(email === "" || password === "")
     {
+        // Remove the loader
+        login_loader.style.display = "none";
+
         // Display error
         error_prompt.innerHTML = "Please fill up all the columns!";
     }
@@ -174,10 +181,17 @@ function login()
     {
         firebase.auth().signInWithEmailAndPassword(email, password)
         .then((user) => {
+            // Display error
+            error_prompt.innerHTML = "";
+            
             // Signed in 
             window.location.href = "backstage.html";
         })
         .catch((error) => {
+
+            // Remove the loader
+            login_loader.style.display = "none";
+
             var errorCode = error.code;
             var errorMessage = error.message;
 
