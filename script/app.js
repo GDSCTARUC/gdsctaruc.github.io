@@ -169,6 +169,9 @@ function login()
     // Show the loader
     login_loader.style.display = "";
 
+    // Clear the error message
+    error_prompt.innerHTML = "";
+
     if(email === "" || password === "")
     {
         // Remove the loader
@@ -181,9 +184,7 @@ function login()
     {
         firebase.auth().signInWithEmailAndPassword(email, password)
         .then((user) => {
-            // Display error
-            error_prompt.innerHTML = "";
-            
+
             // Signed in 
             window.location.href = "backstage.html";
         })
@@ -192,11 +193,13 @@ function login()
             // Remove the loader
             login_loader.style.display = "none";
 
-            var errorCode = error.code;
-            var errorMessage = error.message;
+            // var errorCode = error.code;
+            // var errorMessage = error.message;
+
+            // console.log(errorCode)
 
             // Display error
-            error_prompt.innerHTML = errorMessage;
+            error_prompt.innerHTML = "Invalid username or password!";
         });
     }
     
