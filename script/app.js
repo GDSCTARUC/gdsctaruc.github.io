@@ -185,8 +185,23 @@ function login()
         firebase.auth().signInWithEmailAndPassword(email, password)
         .then((user) => {
 
-            // Signed in 
-            window.location.href = "backstage.html";
+            firebase.auth().onIdTokenChanged(function(user) {
+
+                if(user.uid === "qSTmjO7s3zXDFPM7biFKamYLgvc2")
+                {
+                    // Signed in 
+                    window.location.href = "backstage.html";
+                }
+                else
+                {
+                    // Display error
+                    error_prompt.innerHTML = "Invalid username or password!";
+                    
+                    // Remove the loader
+                    login_loader.style.display = "none";
+                }
+            });    
+            
         })
         .catch((error) => {
 
