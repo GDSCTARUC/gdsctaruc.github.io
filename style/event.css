@@ -1,0 +1,51 @@
+.countdown {}
+
+.countdown ul li {
+    display: inline-block;
+    list-style-type: none;
+    font-size: 1.5rem;
+    padding: 1rem;
+    text-transform: uppercase;
+}
+
+.countdown li span {
+    display: block;
+    font-size: 4.5rem;
+}
+
+.dsc-banner {
+    text-align: center;
+    width: 100%;
+    height: 90%;
+    padding-top: 15%;
+    background-image: url(../images/img2.jpeg);
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.dsc-banner-h1 {
+    font-size: 4.5rem;
+}
+
+@media only screen and (max-width: 630px) {
+    .countdown ul li {
+        font-size: 1.0rem;
+    }
+    .countdown li span {
+        font-size: 3.5rem;
+    }
+}
+
+.dsc-banner-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.white-round-container {
+    border-radius: 10px;
+    background-color: white;
+    align-items: center;
+}
