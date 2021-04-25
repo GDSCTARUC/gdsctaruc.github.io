@@ -4,7 +4,7 @@
     display: inline-block;
     list-style-type: none;
     font-size: 1.5rem;
-    padding: 1rem;
+    padding: 0 1rem 1rem 1rem;
     text-transform: uppercase;
 }
 
@@ -48,4 +48,10 @@
     border-radius: 10px;
     background-color: white;
     align-items: center;
+}
+
+.text-next-event {
+    padding: 1rem 1rem 0 1rem;
+    margin-bottom: 0;
+    font-size: x-large;
 }
