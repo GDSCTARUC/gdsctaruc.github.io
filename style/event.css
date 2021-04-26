@@ -55,3 +55,42 @@
     margin-bottom: 0;
     font-size: x-large;
 }
+
+.short-detail-icon {
+    font-size: 40px;
+    padding: 0 10px 0 0;
+}
+
+.dsc-nextevent-shortdetail h5 {
+    text-align: left;
+    margin: auto 0;
+}
+
+.next-event-short-details {
+    display: flex;
+    row-gap: 10px;
+    flex-direction: column;
+    margin-top: 22px;
+}
+
+.short-detail {
+    padding-bottom: 20px;
+}
+
+.next-event-detail {
+    padding-bottom: 10px;
+}
+
+.dsc-next-event-container {
+    width: 100%;
+    padding: 40px;
+    position: relative;
+}
+
+.event-photo img {
+    width: 60%;
+}
+
+.short-detail-text {
+    margin: auto 0;
+}
