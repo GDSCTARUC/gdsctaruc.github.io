@@ -55,22 +55,10 @@ var Page = {
 var Cookie = {
     Create: function(n, t, r) {
         var u, f, e;
-        if (r ? (e = new Date,
+        r ? (e = new Date,
                 e.setTime(e.getTime() + r * 864e5),
                 u = "; expires=" + e.toGMTString()) : u = "",
-            host = location.hostname,
-            host.split(".").length === 1 || isIPDomain(host))
-            f = host,
-            document.cookie = n + "=" + t + u + "; path=/; domain=" + f;
-        else {
-            if (domainParts = host.split("."),
-                host.split(".").length >= 3) {
-                for (i = 1; i <= host.split(".").length - 2; i++)
-                    domainParts.shift();
-                f = "." + domainParts.join(".")
-            }
-            document.cookie = n + "=" + t + u + "; path=/; domain=" + f
-        }
+            document.cookie = n + "=" + t + u + "; path=/;";
     },
     Delete: function(n) {
         Cookie.Create(n, "", -1);
