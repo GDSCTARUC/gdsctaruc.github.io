@@ -30,8 +30,8 @@ function IsCurrentEvent(event) {
     if (event == undefined) {
         return false;
     }
-    let eStart = event.start.moment;
-    let eEnd = event.end.moment;
+    let eStart = moment(new Date(event.start.moment));
+    let eEnd = moment(new Date(event.end.moment));
     let now = moment();
     if (((now - eStart) > 0) && ((now - eEnd) < 0)) {
         return true;
@@ -55,8 +55,7 @@ function Countdown(event) {
         return;
     }
 
-    let eStart = event.start.moment;
-
+    let eStart = moment(new Date(event.start.moment));
     x = setInterval(function() {
         let now = moment();
         let distance = eStart - now;
@@ -111,13 +110,13 @@ async function loadCalendar() {
                                 date: sdt.format("DD MMMM YYYY"),
                                 day: sdt.format("dddd"),
                                 time: sdt.format("hh:mm a"),
-                                moment: sdt,
+                                moment: sdt.toString(),
                             };
                             e.end = {
                                 date: edt.format("DD MMMM YYYY"),
                                 day: edt.format("dddd"),
                                 time: edt.format("hh:mm a"),
-                                moment: edt,
+                                moment: edt.toString(),
                             };
                             if (edt - cdt > 0) {
                                 eCalendar.events.upcoming.push(e);
@@ -272,12 +271,10 @@ function AppendUpcomingEvents(events) {
 
         $("#upcoming-events").append($eventContainer);
     });
-    console.log("passed");
     Page.EventOn();
 }
 
 function PostRender() {
-    console.log(eCalendar.env.googleCalendarApiKey);
     AppendPassEvents(eCalendar.events.past);
     AppendUpcomingEvents(eCalendar.events.upcoming);
     Countdown(eCalendar.events.upcoming[0]);
@@ -377,10 +374,11 @@ $(document).ready(function() {
     Page.FullLoading();
     FcRender();
     if (Cookie.Get('dsc-events') != "") {
+        console.log("INFO: Events Cookies Found: Reusing Cookie Data");
         eCalendar = Helper.HTMLJsonToJson(Cookie.Get('dsc-events'));
-        console.log(eCalendar);
         PostRender();
     } else {
+        console.log("INFO: Events Cookies Not Found: Reloading cookies");
         gapi.load("client", loadCalendar)
     }
     setTimeout(function() {
