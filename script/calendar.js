@@ -72,41 +72,6 @@ function Countdown(event) {
     }, 0);
 }
 
-function PostRender() {
-
-    AppendPassEvents(eCalendar.events.past);
-    AppendUpcomingEvents(eCalendar.events.upcoming);
-    Countdown(eCalendar.events.upcoming[0]);
-    $(".card-slider").slick({
-        dots: true,
-        infinite: false,
-        speed: 500,
-        slidesToShow: 3,
-        slidesToScroll: 1,
-        autoplay: false,
-        autoplaySpeed: 2000,
-        arrows: true,
-        responsive: [{
-                breakpoint: 600,
-                settings: {
-                    slidesToShow: 1,
-                    slidesToScroll: 1,
-                },
-            },
-            {
-                breakpoint: 400,
-                settings: {
-                    arrows: false,
-                    slidesToShow: 1,
-                    slidesToScroll: 1,
-                },
-            },
-        ]
-    });
-
-    Page.FullLoadingDismiss();
-}
-
 async function loadCalendar() {
     await gapi.client
         .init({
@@ -185,7 +150,6 @@ async function loadCalendar() {
     eCalendar.events.past.sort((a, b) => (a.start.moment > b.start.moment) ? -1 : ((b.start.moment > a.start.mement) ? 1 : 0));
     Cookie.Create("dsc-events", JSON.stringify(eCalendar), 30 / 24 / 60);
     PostRender();
-    AOS.init();
 }
 
 
@@ -308,7 +272,44 @@ function AppendUpcomingEvents(events) {
 
         $("#upcoming-events").append($eventContainer);
     });
+    console.log("passed");
     Page.EventOn();
+}
+
+function PostRender() {
+    console.log(eCalendar.env.googleCalendarApiKey);
+    AppendPassEvents(eCalendar.events.past);
+    AppendUpcomingEvents(eCalendar.events.upcoming);
+    Countdown(eCalendar.events.upcoming[0]);
+    $(".card-slider").slick({
+        dots: true,
+        infinite: false,
+        speed: 500,
+        slidesToShow: 3,
+        slidesToScroll: 1,
+        autoplay: false,
+        autoplaySpeed: 2000,
+        arrows: true,
+        responsive: [{
+                breakpoint: 600,
+                settings: {
+                    slidesToShow: 1,
+                    slidesToScroll: 1,
+                },
+            },
+            {
+                breakpoint: 400,
+                settings: {
+                    arrows: false,
+                    slidesToShow: 1,
+                    slidesToScroll: 1,
+                },
+            },
+        ]
+    });
+
+    Page.FullLoadingDismiss();
+    AOS.init();
 }
 
 function FcRender() {
@@ -378,15 +379,9 @@ $(document).ready(function() {
     if (Cookie.Get('dsc-events') != "") {
         eCalendar = Helper.HTMLJsonToJson(Cookie.Get('dsc-events'));
         console.log(eCalendar);
-
         PostRender();
     } else {
-        Global_Promise.push(
-            new Promise((resolve, reject) => {
-                gapi.load("client", loadCalendar)
-                return true;
-            })
-        );
+        gapi.load("client", loadCalendar)
     }
     setTimeout(function() {
         Page.FullLoadingDismiss()
