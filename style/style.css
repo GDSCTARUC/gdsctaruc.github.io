@@ -1,36 +1,88 @@
-*{
+* {
     margin: 0;
     padding: 0;
 }
 
-html{
+@font-face {
+    font-family: "Google Sans";
+    src: url("/fonts/GoogleSansDisplay-Regular-v1.27.ttf") format("truetype"), url("/fonts/GoogleSans-Regular-v1.27.ttf") format("truetype");
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Google Sans";
+    src: url("/fonts/GoogleSansDisplay-Bold-v1.27.ttf") format("truetype"), url("/fonts/GoogleSans-Bold-v1.27.ttf") format("truetype");
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Google Sans";
+    src: url("/fonts/GoogleSansDisplay-BoldItalic-v1.27.ttf") format("truetype"), url("/fonts/GoogleSans-BoldItalic-v1.27.ttf") format("truetype");
+    font-weight: 700;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Google Sans";
+    src: url("/fonts/GoogleSansDisplay-Italic-v1.27.ttf") format("truetype"), url("/fonts/GoogleSans-Italic-v1.27.ttf") format("truetype");
+    font-weight: 400;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Google Sans";
+    src: url("/fonts/GoogleSansDisplay-Medium-v1.27.ttf") format("truetype"), url("/fonts/GoogleSans-Medium-v1.27.ttf") format("truetype");
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Google Sans";
+    src: url("/fonts/GoogleSansDisplay-MediumItalic-v1.27.ttf") format("truetype"), url("/fonts/GoogleSans-MediumItalic-v1.27.ttf") format("truetype");
+    font-weight: 500;
+    font-style: italic;
+    font-display: swap;
+}
+
+html {
     scroll-behavior: smooth;
 }
 
-.nav-link{
+body {
+    font-family: "Google Sans", "sans-serif";
+}
+
+.nav-link {
     cursor: pointer;
 }
 
-.navbar-brand{
+.navbar-brand {
     width: 50px;
     margin: 0;
 }
 
-.dsc-body{
+.dsc-body {
     position: relative;
 }
 
-.dsc-body{
+.dsc-body {
     width: 100%;
+    height: 100%;
     min-height: 300px;
     background-image: url(../images/blue-maize-pencils-teaser-1090x681.jpg);
-    background-position:center;
+    background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
 }
 
-.dsc-banner-text
-{
+.dsc-banner-text {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -39,184 +91,194 @@ html{
     width: 100%;
 }
 
-#body-banner{
+#body-banner {
     opacity: 0;
     max-width: 900px;
 }
 
-.dsc-aboutus
-{
+.dsc-aboutus {
     width: 100%;
-    padding:40px;
+    padding: 40px;
     position: relative;
 }
 
-.about-photo
-{
+.about-photo {
     width: 100%;
 }
 
-.about-photo img
-{
+.about-photo img {
     width: 100%;
 }
 
-.dsc-whatwedo{
+.dsc-whatwedo {
     width: 100%;
     background-color: rgb(254, 255, 210);
     margin: 0!important;
     padding: 40px;
 }
 
-.whatwedo-img img
-{
+.whatwedo-img img {
     max-width: 500px;
     width: 100%;
 }
 
-.whatwedo-title{
+.whatwedo-title {
     padding-bottom: 40px;
 }
 
-.dsc-container{
+.dsc-container {
     width: 100%;
 }
 
-footer{
+footer {
     padding: 15px;
     width: 100%;
     background-color: rgb(70, 69, 69);
 }
 
-#footer-logo{
+#footer-logo {
     max-width: 40px;
     width: 100%;
 }
 
-#logo-col{
+#logo-col {
     text-align: center;
 }
 
-.media-icons{
+.media-icons {
     font-size: 50px;
     cursor: pointer;
 }
 
-.media-icons:hover{
+.media-icons:hover {
     text-decoration: none;
 }
 
-.dsc-social-media .media-icons
-{
+.dsc-social-media .media-icons {
     color: white;
     opacity: 0.5;
     font-size: 30px;
 }
 
-.media-icons:hover{
+.media-icons:hover {
     opacity: 1;
 }
 
-.our-team{
+.our-team {
     min-height: 500px;
     background-color: rgb(255, 255, 255);
     padding: 20px;
 }
 
-.member-photo img{
+.member-photo img {
     max-width: 250px;
     max-height: 250px;
     width: 100%;
 }
 
-.member-row{
+.member-row {
     margin-top: 40px;
 }
 
-.get-in-touch{
+.get-in-touch {
     background-color: rgb(254, 255, 210);
     padding: 40px;
 }
 
-.contact-input{
+.contact-input {
     padding: 40px;
     background-color: white;
     margin-bottom: 20px;
 }
 
-.dsc-contact-medias ul{
+.dsc-contact-medias ul {
     list-style: none;
 }
 
-.dsc-contact-medias ul li a{
+.dsc-contact-medias ul li a {
     color: black!important;
 }
 
-.dsc-contact-medias ul li a:hover{
+.dsc-contact-medias ul li a:hover {
     text-decoration: none;
 }
 
-.contact-text{
+.contact-text {
     position: relative;
     bottom: 12px;
 }
 
-.footer-discord{
+.footer-discord {
     position: relative;
     top: 2px;
 }
 
-.about-text h2, .whatwedo-title h2{
+.about-text h2,
+.whatwedo-title h2 {
     text-align: center;
 }
 
-@media (min-width:750px)
-{
-    .about-photo img
-    {
+@media (min-width:750px) {
+    .about-photo img {
         width: 380px;
     }
-
-    #logo-col{
+    #logo-col {
         text-align: left;
     }
-
-    .whatwedo-container{
+    .whatwedo-container {
         padding: 40px;
     }
-
-    .contact-container{
+    .contact-container {
         padding: 0 5%;
     }
-
-    .whatwedo-title{
+    .whatwedo-title {
         padding: 40px;
     }
-
-    .dsc-contact-medias{
+    .dsc-contact-medias {
         padding: 0 10%;
     }
-
-    .about-text h2, .whatwedo-title h2{
+    .about-text h2,
+    .whatwedo-title h2 {
         text-align: left;
     }
 }
 
-@media (min-width: 1050px)
-{
-    .about-photo img
-    {
+@media (min-width: 1050px) {
+    .about-photo img {
         width: 100%;
     }
-
-    .about-text{
+    .about-text {
         padding: 40px;
     }
 }
 
-@media (min-width: 1920px)
-{
-    .dsc-aboutus{
+@media (min-width: 1920px) {
+    .dsc-aboutus {
         padding: 0 5%;
     }
+}
+
+.modal-full {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    margin: 0px;
+    transform: translate(-50%, -50%) !important;
+}
+
+.fc-daygrid-event-dot,
+.fc-list-event-dot {
+    border-color: #FFFFFF !important;
+}
+
+.avatar {
+    width: 250px;
+    height: 250px;
+    border-radius: 50%;
+    background-clip: padding-box;
+    background-size: cover;
+    background-position: center center;
+    margin-left: auto;
+    margin-right: auto;
 }
