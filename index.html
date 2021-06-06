@@ -65,7 +65,22 @@
     </script>
     <script src="script/helper.js"></script>
     <script src="script/member.js"></script>
-
+    <script>
+        $(document).ready(function() {
+            Page.FullLoading();
+            if (Cookie.Get("dsc-members") != "") {
+                Members = Helper.HTMLJsonToJson(Cookie.Get("dsc-members"));
+                Append_To_Team_Div(Members);
+            } else {
+                GetTeams().then(function(result) {
+                    Cookie.Create("dsc-members", JSON.stringify(Members), 30 / 24 / 60)
+                });
+            }
+            setTimeout(function() {
+                Page.FullLoadingDismiss()
+            }, 5000);
+        });
+    </script>
 </head>
 
 <body>
@@ -206,7 +221,7 @@
                 <p>Our team comprises of 12 core members that are dedicated to helping their peers learn and connect</p>
             </div>
 
-            <div id="teams" class="memebers-container" data-aos="fade-up" data-aos-duration="2000">
+            <div id="teams" class="members-container" data-aos="fade-up" data-aos-duration="2000">
 
 
             </div>

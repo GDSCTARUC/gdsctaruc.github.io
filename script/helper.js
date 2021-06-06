@@ -33,8 +33,16 @@ var Helper = {
     isMobile: CheckMobile(),
     isDesktop: !CheckMobile(),
     LocalMediaPath: 'images/',
-    GetFirebaseMediaURLAsPromise: GetFirebaseMediaPromise,
     HTMLJsonToJson: HTMLJsonToJson,
+}
+
+var Firebase_Helper = {
+    GetEventMediaURLAsPromise: GetFirebaseMediaPromise,
+    MembersImgStorageRef: firebase.storage().ref("images/members"),
+    EventImgStorageRef: firebase.storage().ref("images/events"),
+    MembersCollectionDoc: firebase.firestore().collection("dsc").doc("members"),
+    StorageRef: firebase.storage(),
+    FirestoreRef: firebase.firestore(),
 }
 
 var Page = {

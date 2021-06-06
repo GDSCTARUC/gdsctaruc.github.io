@@ -133,7 +133,7 @@ async function loadCalendar() {
         );
     for (var e of eCalendar.events.past) {
         try {
-            e.media = await Helper.GetFirebaseMediaURLAsPromise(e.media);
+            e.media = await Firebase_Helper.GetEventMediaURLAsPromise(e.media);
         } catch (ex) {} finally {
             continue;
         }
@@ -141,7 +141,7 @@ async function loadCalendar() {
     }
     for (var e of eCalendar.events.upcoming) {
         try {
-            e.media = await Helper.GetFirebaseMediaURLAsPromise(e.media);
+            e.media = await Firebase_Helper.GetEventMediaURLAsPromise(e.media);
         } catch (ex) {} finally {
             continue;
         }

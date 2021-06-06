@@ -1,8 +1,12 @@
 var memberImgStorageRef = firebase.storage().ref("images/committees/");
 var db = firebase.firestore();
-var Members = [];
+var Members = {};
 
 function Append_To_Team_Div(members_data) {
+    var members_data = SortingMembersToArray(members_data);
+    members_data = members_data.filter((item) => {
+        return item[1]["active"];
+    });
     var member_size = members_data.length;
     var our_team_div = $("#teams");
     while (member_size > 0) {
@@ -40,37 +44,28 @@ function Append_To_Team_Div(members_data) {
         our_team_div.append(div_member_row);
     }
 }
-
-async function async_updateImgURL() {
-    await db.collection("dsc").doc("members").get().then((querySnapshot) => {
+async function GetMemberCollection() {
+    await Firebase_Helper.MembersCollectionDoc.get().then((querySnapshot) => {
         var data = querySnapshot.data();
-        members = Object.keys(data).map(function(key) {
-            return [key, data[key]];
-        });
-        members.sort(function(first, second) {
-            return first[1]["priority"] - second[1]["priority"];
-        })
+        Members = data;
     });
-    for (i = 0; i < members.length; i++) {
-        let url = await memberImgStorageRef.child(members[i][1]["imageURL"]).getDownloadURL();
-        members[i][1]["imageURL"] = url;
+    for (k in Members) {
+        let url = await Firebase_Helper.MembersImgStorageRef.child(Members[k]["imageURL"]).getDownloadURL();
+        Members[k]["imageURL"] = url;
     }
-    Members.push(...members);
-    Append_To_Team_Div(members);
-
 }
 
-$(document).ready(function() {
-    Page.FullLoading();
-    if (Cookie.Get("dsc-members") != "") {
-        Members = Helper.HTMLJsonToJson(Cookie.Get("dsc-members"));
-        Append_To_Team_Div(Members);
-    } else {
-        async_updateImgURL().then(function(result) {
-            Cookie.Create("dsc-members", JSON.stringify(Members), 30 / 24 / 60)
-        });
-    }
-    setTimeout(function() {
-        Page.FullLoadingDismiss()
-    }, 5000);
-});
+async function GetTeams() {
+    await GetMemberCollection();
+    Append_To_Team_Div(Members);
+}
+
+function SortingMembersToArray(members) {
+    members = Object.keys(members).map(function(key) {
+        return [key, members[key]];
+    });
+    members.sort(function(first, second) {
+        return first[1]["priority"] - second[1]["priority"];
+    })
+    return members;
+}
