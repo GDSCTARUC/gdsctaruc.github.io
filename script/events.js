@@ -66,14 +66,23 @@ function Countdown(event) {
     $("#countdown-block").show();
 }
 
+function ConvertEventDict(obj) {
+    for(var k of Object.keys(obj)) {
+        obj[k].start = moment(obj[k].start);
+        obj[k].end = moment(obj[k].end);
+    }
+    return obj;
+}
+
 async function LoadEvents() {
     if (Cookie.Get("dsc-events") != "") {
         console.log("INFO: Events Cookies Found: Reusing Cookie Data");
         Events = Helper.HTMLJsonToJson(Cookie.Get("dsc-events"));
+        Events = ConvertEventDict(Events);
     } else {
         console.log("INFO: Events Cookies Not Found: Reloading cookies");
         await ReadEvents();
-        Cookie.Create("dsc-events", JSON.stringify(eCalendar), 30 / 24 / 60);
+        Cookie.Create("dsc-events", JSON.stringify(Events), 30 / 24 / 60);
     }
     Events = GetActiveEvents(Events);
     var [past, upcoming] = EventsSpliterAndSort(Events);
