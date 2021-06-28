@@ -199,3 +199,22 @@
 .fc-list-event-graphic {
     padding-top: 12px !important;
 }
+
+.workshop {
+    color: #FFFFFF;
+    background-color: #00796b;
+}
+
+.event {
+    color: #FFFFFF;
+    background-color: #e64a19;
+}
+
+.talk {
+    color: #FFFFFF;
+    background-color: #1976d2;
+}
+
+.fc-scroller {
+    overflow: hidden hidden !important;
+}
