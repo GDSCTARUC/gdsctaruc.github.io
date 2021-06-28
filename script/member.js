@@ -1,5 +1,3 @@
-var memberImgStorageRef = firebase.storage().ref("images/committees/");
-var db = firebase.firestore();
 var Members = {};
 
 function Append_To_Team_Div(members_data) {
@@ -29,7 +27,7 @@ function Append_To_Team_Div(members_data) {
 
             var div_photo = $("<div>", {
                 class: "avatar",
-                style: `background-image:url('${m["imageURL"]}');`
+                style: `background-image:url('${m["picture"]}');`
             });
             var h4_name = $("<h4>");
             h4_name.text(m["name"]);
@@ -45,13 +43,20 @@ function Append_To_Team_Div(members_data) {
     }
 }
 async function GetMemberCollection() {
-    await Firebase_Helper.MembersCollectionDoc.get().then((querySnapshot) => {
-        var data = querySnapshot.data();
-        Members = data;
+    await Firebase_Helper.MembersCollectionRef.get().then((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+            Members[doc.id] = doc.data();
+        });
     });
     for (k in Members) {
-        let url = await Firebase_Helper.MembersImgStorageRef.child(Members[k]["imageURL"]).getDownloadURL();
-        Members[k]["imageURL"] = url;
+        try {
+            let url = await Firebase_Helper.GetMediaURLAsPromise(StorageMediaTypeEnum.Members, Members[k]["picture"]);
+            Members[k]["picture"] = url;
+        } catch(ex) {
+            Members[k]["picture"] = `${Helper.LocalMediaPath}/default_profile_pic.jpg`;
+        }
+        
+        
     }
 }
 

@@ -1,3 +1,8 @@
+const StorageMediaTypeEnum = Object.freeze({
+    "Events": "images/events/",
+    "Members": "images/members/",
+});
+
 function TriggerFullLoadingModal() {
     var bgcolor = $("#modal-loading").data("bg-color");
     if (bgcolor != null) {
@@ -18,29 +23,29 @@ function CheckMobile() {
     return check;
 }
 
-async function GetFirebaseMediaPromise(file) {
+async function GetFirebaseMediaPromise(type, file) {
     var url;
-    var storageRef = firebase.storage().ref("images/events/");
+    var storageRef = Firebase_Helper.StorageRef.ref(type);
     await storageRef.child(file).getDownloadURL().then((result) => {
         url = result;
     });
     return url;
 }
 
-
-
 var Helper = {
     isMobile: CheckMobile(),
     isDesktop: !CheckMobile(),
-    LocalMediaPath: 'images/',
+    LocalMediaPath: 'images',
     HTMLJsonToJson: HTMLJsonToJson,
+    Hostname: window.location.hostname,
 }
 
 var Firebase_Helper = {
-    GetEventMediaURLAsPromise: GetFirebaseMediaPromise,
+    GetMediaURLAsPromise: GetFirebaseMediaPromise,
     MembersImgStorageRef: firebase.storage().ref("images/members"),
     EventImgStorageRef: firebase.storage().ref("images/events"),
-    MembersCollectionDoc: firebase.firestore().collection("dsc").doc("members"),
+    MembersCollectionRef: firebase.firestore().collection("members"),
+    EventCollectionRef: firebase.firestore().collection("events"),
     StorageRef: firebase.storage(),
     FirestoreRef: firebase.firestore(),
 }
