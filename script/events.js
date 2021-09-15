@@ -5,21 +5,6 @@ const EventTypeEnum = Object.freeze({
 });
 var Events = {};
 
-var Event_Styles = {
-    [EventTypeEnum.Workshop]: {
-        color: "#FFFFFF",
-        backgroundColor: "#00796b",
-    },
-    [EventTypeEnum.Event]: {
-        color: "#FFFFFF",
-        backgroundColor: "#e64a19",
-    },
-    [EventTypeEnum.Talk]: {
-        color: "#FFFFFF",
-        backgroundColor: "#1976d2",
-    },
-};
-
 var Global_Promise = [];
 
 function IsCurrentEvent(event) {
@@ -62,31 +47,15 @@ function Countdown(event) {
         $("#seconds").text(Math.floor((distance % minute) / second));
 
         //seconds
-    }, 0);
+    }, 1000);
     $("#countdown-block").show();
 }
 
-function ConvertEventDict(obj) {
-    for(var k of Object.keys(obj)) {
-        obj[k].start = moment(obj[k].start);
-        obj[k].end = moment(obj[k].end);
-    }
-    return obj;
-}
-
 async function LoadEvents() {
-    if (Cookie.Get("dsc-events") != "") {
-        console.log("INFO: Events Cookies Found: Reusing Cookie Data");
-        Events = Helper.HTMLJsonToJson(Cookie.Get("dsc-events"));
-        Events = ConvertEventDict(Events);
-    } else {
-        console.log("INFO: Events Cookies Not Found: Reloading cookies");
-        await ReadEvents();
-        Cookie.Create("dsc-events", JSON.stringify(Events), 30 / 24 / 60);
-    }
-    Events = GetActiveEvents(Events);
+    
+    await ReadEvents();
+    
     var [past, upcoming] = EventsSpliterAndSort(Events);
-    FcRender();
     PostRender(past, upcoming);
 }
 
@@ -110,16 +79,6 @@ async function ReadEvents() {
             continue;
         }
     }
-}
-
-function GetActiveEvents(events) {
-    var result = {};
-    for (var k of Object.keys(events)) {
-        if(events[k].active) {
-            result[k] = events[k];
-        }
-    }
-    return result;
 }
 
 function EventsSpliterAndSort(events) {
@@ -151,31 +110,22 @@ function ClearEvent(type) {
 }
 
 function AppendPassEvents(events) {
-    ClearEvent("past");
+
+    var pastEventContainer = document.getElementById("past-events-list");
+
     $.each(events, function(idx, e) {
-        var $body = $("<div>", { class: "card-body" });
-        var $top = $("<img>", {
-            class: "card-img-top",
-            src: e.poster,
-            alt: e.title + " Poster",
-        });
-        var $title = $("<h5>", { class: "card-title" }).text(e.title);
-        $body.append($title);
-        var $desc = $("<p>", { class: "card-text" }).text(e.desc);
-        $body.append($desc);
-        var $redirect = $("<a>", {
-            class: "btn btn-primary",
-            href: e.fbUrl,
-        }).text("Go");
-        $body.append($redirect);
-        var $card = $("<div>", { class: "card w-100" });
-        $card.append($top);
-        $card.append($body);
 
-        var $col = $("<div>", { class: "col-lg-12" });
-        $col.append($card);
-
-        $("#past-events-list").append($col);
+        pastEventContainer.innerHTML = pastEventContainer.innerHTML +
+        '<div class="col-sm-6 col-lg-4 mt-3">' +
+            '<div class="card w-100">' +
+                '<img class="card-img-top" src="' + e.poster + '" alt="' + e.title + ' Poster">' +
+                '<div class="card-body">' +
+                    '<h5 class="card-title">' + e.title + '</h5>' +
+                    '<p class="card-text">'+ e.desc + '</p>' +
+                    '<a href="' + e.fbUrl + '" class="btn btn-primary">Go</a>' +
+                '</div>' +
+            '</div>' +
+        '</div>';
     });
 }
 
@@ -315,70 +265,9 @@ function PostRender(past, upcoming) {
     AppendPassEvents(past);
     AppendUpcomingEvents(upcoming);
     Countdown(upcoming[0]);
-    $(".card-slider").slick({
-        dots: true,
-        infinite: false,
-        speed: 500,
-        slidesToShow: 3,
-        slidesToScroll: 1,
-        autoplay: false,
-        autoplaySpeed: 2000,
-        arrows: true,
-        responsive: [{
-                breakpoint: 600,
-                settings: {
-                    slidesToShow: 1,
-                    slidesToScroll: 1,
-                },
-            },
-            {
-                breakpoint: 400,
-                settings: {
-                    arrows: false,
-                    slidesToShow: 1,
-                    slidesToScroll: 1,
-                },
-            },
-        ],
-    });
-
     Page.FullLoadingDismiss();
     AOS.init();
 }
-
-function FcRender() {
-    var calendarEl = document.getElementById("calendar");
-    var events = FcEventConverter(Events);
-    var calendar = new FullCalendar.Calendar(calendarEl, {
-        events: events,
-        eventDidMount: function(e) {
-            var start = moment(e.event.start).format("HH:mm");
-            var end = moment(e.event.end).format("HH:mm");
-            $(e.el).tooltip({
-                title: "Time: " + start + "-" + end,
-            });
-        },
-        initialView: Helper.isMobile ? "listMonth" : "dayGridMonth",
-        themeSystem: "bootstrap",
-        bootstrapFontAwesome: false,
-        buttonText: {
-            today: "Today",
-            next: ">",
-            prev: "<",
-        },
-        headerToolbar: {
-            left: "today",
-            center: "title",
-            right: "prev,next",
-        },
-        displayEventTime: false,
-        contentHeight: 600,
-        aspectRatio: 2,
-    });
-    calendar.render();
-}
-
-
 
 function FcEventConverter(events) {
     var fcEvents = [];

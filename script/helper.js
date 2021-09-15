@@ -29,6 +29,27 @@ async function GetFirebaseMediaPromise(type, file) {
     await storageRef.child(file).getDownloadURL().then((result) => {
         url = result;
     });
+
+    await storageRef.listAll()
+    .then((res) => {
+        res.prefixes.forEach((folderRef) => {
+        // All the prefixes under listRef.
+        // You may call listAll() recursively on them.
+        });
+
+        // res.items.forEach((itemRef) => {
+        // // All the items under listRef.
+        // console.log(itemRef)
+        // itemRef.getDownloadURL().then((result) => {
+        //     console.log(result)
+        // });
+        
+        // });
+    }).catch((error) => {
+        // Uh-oh, an error occurred!
+        console.log(error)
+    });
+
     return url;
 }
 
