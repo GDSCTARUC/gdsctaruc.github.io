@@ -34,7 +34,7 @@ function printEvent(){
                             '</div>'+
                         '</div>'+
                         '<div>'+
-                            '<a href="www.facebook.com" class="btn btn-primary">Register Now</a>'+
+                            '<a href="' + doc.data().fbUrl + '" class="btn btn-primary" target="_blank">Register Now</a>'+
                         '</div>'+
                     '</div>'+
                 '</div>';
