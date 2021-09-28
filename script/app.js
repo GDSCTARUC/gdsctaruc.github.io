@@ -287,9 +287,3 @@ function websiteLoading(){
     }, 4000);
 
 }
-
-function displayLoading(){
-    var loading_img = document.getElementById("loading-img");
-
-    loading_img.src = "images/loading.gif";
-}
