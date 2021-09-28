@@ -23,34 +23,9 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx"
         crossorigin="anonymous"></script>
-
-    <!-- Popper JS -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.2/umd/popper.min.js"
-        integrity="sha512-2rNj2KJ+D8s1ceNasTIex6z4HWyOnEYLVC3FigGOmyQCZc2eBXKgOxQmo3oKLHyfcj53uz4QMsRCWNbLd32Q1g=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-
-    <!-- Moment JS -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment-with-locales.min.js"
-        integrity="sha512-LGXaggshOkD/at6PFNcp2V2unf9LzFq6LE+sChH7ceMTDP0g2kn6Vxwgg7wkPP7AAtX+lmPqPdxB47A0Nz0cMQ=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-
-    <!-- bootstrap datetimepicker-->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"
-        integrity="sha512-GDey37RZAxFkpFeJorEUwNoIbkTwsyC736KNSYucu1WJWFK9qTdzYub8ATxktr6Dwke7nbFaioypzbDOQykoRg=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.min.css" integrity="sha512-aEe/ZxePawj0+G2R+AaIxgrQuKT68I28qh+wgLrcAJOz3rxCP+TwrK5SPN+E5I+1IQjNtcfvb96HDagwrKRdBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.39.0/js/tempusdominus-bootstrap-4.min.js" integrity="sha512-k6/Bkb8Fxf/c1Tkyl39yJwcOZ1P4cRrJu77p83zJjN2Z55prbFHxPs9vN7q3l3+tSMGPDdoH51AEU8Vgo1cgAA==" crossorigin="anonymous"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.39.0/css/tempusdominus-bootstrap-4.min.css" integrity="sha512-3JRrEUwaCkFUBLK1N8HehwQgu8e23jTH4np5NHOmQOobuC4ROQxFwFgBLTnhcnQRMs84muMh0PnnwXlPq5MGjg==" crossorigin="anonymous" />
     
     <!-- Fontawesome -->
     <link href="fontawesome-free-5.15.1-web/css/all.css" rel="stylesheet">
-    
-    <!-- Javascript -->
-    <script src="script/app.js"></script>
-
-    <!-- Jquery Validate -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/additional-methods.js"></script>
 
     <!-- CSS -->
     <link rel="stylesheet" href="style/backstage.css">
@@ -60,9 +35,6 @@
         href="https://cdn.datatables.net/1.10.25/css/dataTables.bootstrap4.min.css" />
     <script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.25/js/dataTables.bootstrap4.min.js"></script>
-
-    <!-- DataTables Moment Plugin-->
-    <script src="https://cdn.datatables.net/plug-ins/1.10.25/sorting/datetime-moment.js"></script>
 
     <!-- Firebase -->
     <!-- The core Firebase JS SDK is always required and must be listed first -->
@@ -88,247 +60,252 @@
         firebase.initializeApp(firebaseConfig);
     </script>
 
+    <!-- Javascript -->
+    <script src="script/app.js"></script>
+    <script src="script/backstage.js"></script>
+    <script src="script/backstage-member.js"></script>
+    <script src="script/backstage-event.js"></script>
+
     <!-- Authentication -->
     <script>
         checkLogin();
     </script>
-    <script src="script/helper.js"></script>
-    <script src="script/member.js"></script>
-    <script src="script/events.js"></script>
-    <script src="script/backstage.js"></script>
-    <script>
-        $(window).on('hashchange', function () {
-            var hash = window.location.href.split('#')[1];
-            ToggleNav(hash);
-        });
-        $(document).ready(() => {
-            displayRecord();
-            DisplayMember();
-            DisplayEvent();
-
-            $(".form-submit-btn").click((e) => {
-                $(e.target).data("form")
-                $(`#${$(e.target).data("form")} .submit`).click()
-            });
-
-            if(!!window.location.hash) {
-                $(window).trigger('hashchange');
-            }
-
-            $("#datetimepicker1").datetimepicker({
-                icons: {
-                    time: "fa fa-clock",
-                    date: "fa fa-calendar",
-                    up: "fa fa-arrow-up",
-                    down: "fa fa-arrow-down"
-                }
-            });
-
-            $("#datetimepicker2").datetimepicker({
-                icons: {
-                    time: "fa fa-clock",
-                    date: "fa fa-calendar",
-                    up: "fa fa-arrow-up",
-                    down: "fa fa-arrow-down"
-                }
-            });
-
-            $("#datetimepicker1").on("change.datetimepicker", function (e) {
-                $('#datetimepicker2').datetimepicker('minDate', e.date);
-            });
-            $("#datetimepicker2").on("change.datetimepicker", function (e) {
-                $('#datetimepicker1').datetimepicker('maxDate', e.date);
-            });
-            
-        });
-    </script>
-
 </head>
 
 <body>
     <!-- Member Modal -->
     <!-- Member detail modal-->
-    <div class="modal" id="Modal-Member">
-        <div class="modal-dialog" role="document">
+    <div class="modal fade" id="memberModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title"></h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Member</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <div class="modal-body" id="member-body">
-                    <div id="member-avatar">
-                        <div class="avatar"></div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="id">ID</label>
+                        <input type="text" class="form-control" id="member-id" readonly="true" value="Auto Generated">
                     </div>
-                    <div>
-                        <form onsubmit="SubmitMember();return false" id="form-member" enctype="multipart/form-data">
-                            <label for="id">ID</label>
-                            <input type="text" class="form-control" name="id" id="id" readonly="true">
 
-                            <label for="text" class="required">Name</label>
-                            <input type="text" class="form-control" name="name" id="name" required>
+                    <div class="form-group">
+                        <label for="text" class="required">Name</label>
+                        <input type="text" class="form-control" id="member-name" required>
 
-                            <label class="required">Position</label>
-                            <select id="position" name="position" class="custom-select" required>
-                                <option value="DSC Lead" selected>DSC Lead</option>
-                                <option value="DSC Co-Lead">DSC Co-Lead</option>
-                                <option value="Community Lead">Community Lead</option>
-                                <option value="Marketing Lead">Marketing Lead</option>
-                                <option value="Creativity Lead">Creativity Lead</option>
-                                <option value="Technical Team">Technical Team</option>
-                            </select>
-
-                            <label class="required">Profile Picture</label>
-                            <input type="file" class="form-control" name="picture" id="picture"
-                                onchange="renderProfilePic(this);" accept=".jpg, .jpeg, .png">
-
-                            <label class="required">Priority</label>
-                            <select id="priority" name="priority" class="custom-select" required>
-                                <option value="1" selected>1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                            </select>
-                            <label class="required">Active</label>
-                            <select id="active" name="active" class="custom-select" required>
-                                <option value="true" selected>true</option>
-                                <option value="false">false</option>
-                            </select>
-                            <input class="submit" type="submit" style="display:none;">
-                        </form>
+                        <div class="error-container text-danger mt-2"></div>
                     </div>
-                </div>
-                <div class="modal-footer">
-                    <div id="submit-member-form" class="btn btn-primary form-submit-btn" data-form="form-member">Submit</div>
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+
+                    <div class="form-group">
+                        <label class="required">Position</label>
+                        <select id="member-position" name="position" class="custom-select" required>
+                            <option value="DSC Lead" id="DSC Lead">DSC Lead</option>
+                            <option value="DSC Co-Lead" id="DSC Co-Lead">DSC Co-Lead</option>
+                            <option value="Community Lead" id="Community Lead">Community Lead</option>
+                            <option value="Marketing Lead" id="Marketing Lead">Marketing Lead</option>
+                            <option value="Creativity Lead" id="Creativity Lead">Creativity Lead</option>
+                            <option value="Technical Team" id="Technical Team">Technical Team</option>
+                        </select>
+
+                        <div class="error-container text-danger mt-2"></div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="required">Profile Picture</label>
+                        <input type="file" class="form-control" name="picture" id="member-picture"
+                            onchange="renderMemberImage(event);" accept=".jpg, .jpeg, .png">
+
+                        <div class="error-container text-danger mt-2"></div>
+                        <img src="" alt="" id="member-uploaded-img" class="mt-3">
+                        <input type="hidden" id="member-profile-link-hidden">
+                        <input type="hidden" id="member-profile-source-hidden">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="required">Priority</label>
+                        <select id="member-priority" name="priority" class="form-control" required>
+                            <option value="1" id="priority-1">1</option>
+                            <option value="2" id="priority-2">2</option>
+                            <option value="3" id="priority-3">3</option>
+                            <option value="4" id="priority-4">4</option>
+                        </select>
+                        
+                        <div class="error-container text-danger mt-2"></div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="required">Active</label>
+                        <select id="member-active" name="active" class="custom-select" required>
+                            <option value="true" id="member-active-true">true</option>
+                            <option value="false" id="member-active-false">false</option>
+                        </select>
+
+                        <div class="error-container text-danger mt-2"></div>
+                    </div>
+
+                    <div class="form-group form-process-loader">
+                        <span class="">Processing...</span>
+                        <div class="spinner-border text-info form-processing" role="status"></div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary" onclick="submitMember()" id="member-submit-btn">Submit</button>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-    <!-- Delete  modal-->
-    <div class="modal" id="Modal-Delete">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Delete Confirmation</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body" id="modal-delete-body">
-                    <h4> Are you sure to delete? </h4>
-                </div>
-                <div class="modal-footer">
-                    <button id="deleteConfirm" type="button" class="btn btn-danger"
-                        onclick="SubmitDelete()">Confirm</button>
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                </div>
-            </div>
-        </div>
-    </div>
+
     <!-- Event Modal -->
     <!-- Event Detail Modal -->
-    <div class="modal" id="Modal-Event">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title"></h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-    
-                <div class="modal-body" id="event-body">
-                    Poster:
-                    <div style="text-align: center;">
-                        <img class="poster-display" />
-                    </div>
-                    <div>
-                        <form onsubmit="SubmitEvent();return false" id="form-event" enctype="multipart/form-data" >
-                            <label for="id">ID</label>
-                            <input type="text" class="form-control" name="id" readonly="true">
-                        
-                            <label for="text" class="required">Title</label>
-                            <input type="text" class="form-control" name="title" required>
-                        
-                            <label for="text" class="required">Desc</label>
-                            <textarea type="text" class="form-control" name="desc" required rows="5" cols="30"></textarea>
-                        
-                            <label for="text" class="required">Type</label>
-                            <select name="type" class="custom-select">
-                                <option value="1" selected>Workshop</option>
-                                <option value="2">Talk</option>
-                                <option value="3">Event</option>
-                            </select>
-                            
-                            <div class="form-group">
-                                <label class="required">Start</label>
-                                <div class="input-group date" id="datetimepicker1" data-target-input="nearest">
-                                    <input type="text" class="form-control datetimepicker-input" data-target="#datetimepicker1" name="start" />
-                                    <div class="input-group-append" data-target="#datetimepicker1" data-toggle="datetimepicker">
-                                        <div class="input-group-text"><i class="fa fa-calendar"></i></div>
-                                    </div>
-                                </div>
-                            </div>
+    <div class="modal fade" id="event-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" id="event-modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Event</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
 
-                            <div class="form-group">
-                                <label class="required">End</label>
-                                <div class="input-group date" id="datetimepicker2" data-target-input="nearest">
-                                    <input type="text" class="form-control datetimepicker-input" data-target="#datetimepicker2" name="end" />
-                                    <div class="input-group-append" data-target="#datetimepicker2" data-toggle="datetimepicker">
-                                        <div class="input-group-text"><i class="fa fa-calendar"></i></div>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                        
-                            <label class="required">Platform</label>
-                            <input type="text" class="form-control" name="platform" id="platform" required>
-                        
-                            <label class="required">Register Url</label>
-                            <input type="text" class="form-control" name="regUrl" id="regNowUrl" placeholder="https://www.google.com/"
-                                required>
-                        
-                            <label>FB Post</label>
-                            <input type="text" class="form-control" name="fbUrl" placeholder="https://www.google.com/">
-                        
-                            <label class="required">Active</label>
-                            <select  name="active" class="custom-select">
-                                <option value="true" selected>true</option>
-                                <option value="false">false</option>
-                            </select>
-                        
-                            <label>Poster</label>
-                            <input type="file" class="form-control" name="poster" data-modal="add" accept=".jpg, .jpeg, .png"
-                                onchange="renderPoster(this)">
-                            <input class="submit" type="submit" style="display:none;">
-                        </form>
-                    </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="id">ID</label>
+                    <input type="text" class="form-control" id="event-id" readonly="true" value="Auto Generated">
                 </div>
-                <div class="modal-footer">
-                    <div id="submit-event-form" class="btn btn-primary form-submit-btn" data-form="form-event">Submit</div>
-                    <div type="button" class="btn btn-secondary" data-dismiss="modal">Close</div>
+
+                <div class="form-group">
+                    <label for="text" class="required">Title</label>
+                    <input type="text" class="form-control" id="event-title" required>
+
+                    <div class="error-container-event text-danger mt-2"></div>
+                </div>
+
+                <div class="form-group">
+                    <label for="text" class="required">Description</label>
+                    <textarea type="text" class="form-control" id="event-description" required rows="5" cols="30"></textarea>
+                    <div class="error-container-event text-danger mt-2"></div>
+                </div>
+
+                <div class="form-group">
+                    <label for="text" class="required">Type</label>
+                    <select name="type" class="form-control" id="event-type">
+                        <option value="1" id="event-type-1">Workshop</option>
+                        <option value="2" id="event-type-2">Talk</option>
+                        <option value="3" id="event-type-3">Event</option>
+                    </select>
+
+                    <div class="error-container-event text-danger mt-2"></div>
+                </div>
+                
+                <div class="form-group">
+                    <label class="required">Start</label>
+                    <div class="input-group" >
+                        <input type="datetime-local" class="form-control" id="event-start"/>
+                    </div>
+
+                    <div class="error-container-event text-danger mt-2"></div>
+                </div>
+
+                <div class="form-group">
+                    <label class="required">End</label>
+                    <div class="input-group date">
+                        <input type="datetime-local" class="form-control" id="event-end"/>
+                    </div>
+
+                    <div class="error-container-event text-danger mt-2"></div>
+                </div>
+                
+                <div class="form-group">
+                    <label class="required">Platform</label>
+                    <input type="text" class="form-control" id="event-platform" required placeholder="ex. Google Meet">
+
+                    <div class="error-container-event text-danger mt-2"></div>
+                </div>
+
+                <div class="form-group">
+                    <label class="required">Register Url</label>
+                    <input type="text" class="form-control"  id="register-url" placeholder="https://www.google.com/" required>
+                    <div class="error-container-event text-danger mt-2"></div>
+                </div>
+
+                <div class="form-group">
+                    <label>Facebook Post URL</label>
+                    <input type="text" class="form-control" id="facebook-url" placeholder="https://www.google.com/">
+                    <div class="error-container-event text-danger mt-2"></div>
+                </div>
+
+                <div class="form-group">
+                    <label class="required">Active</label>
+                    <select class="form-control" id="event-active">
+                        <option value="true" id="event-active-true">true</option>
+                        <option value="false" id="event-active-false">false</option>
+                    </select>
+                    <div class="error-container-event text-danger mt-2"></div>
+                </div>
+            
+                <div class="form-group">
+                    <label>Poster</label>
+                    <input type="file" class="form-control" id="event-poster" accept=".jpg, .jpeg, .png"
+                        onchange="renderEventImage(event)">
+                    <div class="error-container-event text-danger mt-2"></div>
+                    <img src="" alt="" id="event-uploaded-img" class="mt-3">
+                    <input type="hidden" id="event-poster-link-hidden">
+                    <input type="hidden" id="event-poster-source-hidden">
+                </div>
+
+                <div class="form-group">
+                    <label>Google Calendar (Optional) <br>
+                        <small class="text-secondary">Press this button to synchronize this event with your Google Calendar</small>
+                    </label>
+
+                    <div>
+                        <button class="btn btn-info" id="authorize_button">Synchronize <i class="far fa-calendar-alt"></i></button>
+                    </div>
+
+                    <div class="error-container-event text-danger mt-2"></div>
+                </div>
+            
+                <div class="form-group form-process-loader">
+                    <span class="">Processing...</span>
+                    <div class="spinner-border text-info form-processing" role="status"></div>
                 </div>
             </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" id="event-submit-btn" onclick="submitEvent()">Submit</button>
+            </div>
+        </div>
         </div>
     </div>
 
     <nav class="navbar navbar-dark bg-dark navbar-expand-lg">
+        <a class="navbar-brand" href="#">GDSC</a>
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
         <div class="collapse navbar-collapse" id="navbarText">
             <ul class="navbar-nav mr-auto">
-                <li class="nav-item" id="home">
+                <li class="nav-item active">
                     <a class="nav-link" href="index.html">
-                        <i class="arrow left"></i> Visit Page </a>
+                    <i class="arrow left"></i> Visit Page </a>
                 </li>
-                <li class="nav-item active" id="contact" >
-                    <a class="nav-link" href="#contact">Contact</a>
+                
+                <li class="nav-item">
+                    <a class="nav-link active" href="#contact"  id="contact-tab" data-toggle="tab" onclick="changeNav(this.id)">Contact</a>
                 </li>
-                <li class="nav-item" id="member" >
-                    <a class="nav-link" href="#member">Member</a>
+
+                <li class="nav-item" >
+                    <a class="nav-link" href="#member" id="member-tab" data-toggle="tab"  onclick="changeNav(this.id)">Member</a>
                 </li>
-                <li class="nav-item" id="event" >
-                    <a class="nav-link" href="#event">Events</a>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="#event" id="event-tab" data-toggle="tab" onclick="changeNav(this.id)">Events</a>
                 </li>
             </ul>
 
@@ -338,135 +315,317 @@
         </div>
     </nav>
 
-    <div id="contact-records" class="container">
-        <div class="record-title mb-3">
-            <h1>Contact Details</h1>
+    <div class="tab-content" id="myTabContent">
+        <div class="tab-container tab-pane fade show active" id="contact">
+            <div class="record-title mb-3">
+                <h1>Contact Details</h1>
+            </div>
+    
+            <div class="backstage-table-container">
+                <table class="table" id="record-body">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th scope="col">Date</th>
+                            <th scope="col">First Name</th>
+                            <th scope="col">Last Name</th>
+                            <th scope="col">Email</th>
+                            <th scope="col" style="width:50%;">Message</th>
+                        </tr>
+                    </thead>
+        
+                    <tbody id="contact-table-body">
+                        <tr id="loader">
+                            <td>
+                                <div class="loader"></div>
+                            </td>
+                            <td>
+                                <div class="loader"></div>
+                            </td>
+                            <td>
+                                <div class="loader"></div>
+                            </td>
+                            <td>
+                                <div class="loader"></div>
+                            </td>
+                            <td>
+                                <div class="loader"></div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
         </div>
+    
+        <div class="tab-container tab-pane fade" id="member">
+            <div class="member-title mb-3">
+                <h1>Members Details</h1>
+            </div>
+            <button class="btn btn-primary mb-3" data-toggle="modal" data-target="#memberModal" onclick="addMember()">Add Member</button>
 
-        <table class="table" id="record-body">
-            <thead class="thead-dark">
-                <tr>
-                    <th scope="col">Date</th>
-                    <th scope="col">First Name</th>
-                    <th scope="col">Last Name</th>
-                    <th scope="col">Email</th>
-                    <th scope="col" style="width:50%;">Message</th>
-                </tr>
-            </thead>
-            <tr id="loader">
-                <td>
-                    <div class="loader"></div>
-                </td>
-                <td>
-                    <div class="loader"></div>
-                </td>
-                <td>
-                    <div class="loader"></div>
-                </td>
-                <td>
-                    <div class="loader"></div>
-                </td>
-                <td>
-                    <div class="loader"></div>
-                </td>
-            </tr>
+            <div class="alert alert-danger alert-dismissible fade show" role="alert" id="member-deleted-alert" style="display:none;">
+                The member is successfully deleted !
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
 
-            <tbody>
-            </tbody>
-        </table>
+            <div class="alert alert-success alert-dismissible fade show" role="alert" id="member-added-alert" style="display:none;">
+                The member is successfully added !
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
 
-    </div>
+            <div class="alert alert-success alert-dismissible fade show" role="alert" id="member-edited-alert" style="display:none;">
+                The member is successfully edited !
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
 
-    <div id="member-tab" class="container" style="display:none;">
-        <div class="member-title mb-3">
-            <h1>Members Details</h1>
+            <div class="alert alert-danger delete-alert" role="alert">
+                The delete request is processing! Please do not refresh the page
+                <div class="spinner-border text-danger ml-2" role="status" style="height: 20px; width: 20px; font-size: 15px;"></div>
+            </div>
+            
+            <div class="backstage-table-container">
+                <table class="table" id="member-table">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th scope="col">ID</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">Position</th>
+                            <th scope="col">Profile Picture</th>
+                            <th scope="col">Priority</th>
+                            <th scope="col">Active</th>
+                            <th scope="col">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="member-table-body">
+                        <tr id="loader">
+                            <td>
+                                <div class="loader"></div>
+                            </td>
+                            <td>
+                                <div class="loader"></div>
+                            </td>
+                            <td>
+                                <div class="loader"></div>
+                            </td>
+                            <td>
+                                <div class="loader"></div>
+                            </td>
+                            <td>
+                                <div class="loader"></div>
+                            </td>
+                            <td>
+                                <div class="loader"></div>
+                            </td>
+                            <td>
+                                <div class="loader"></div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
         </div>
-        <button class="btn btn-primary mb-3" onclick="MemberModalAdd()">Add Member</button>
-        <table class="table" id="member-table">
-            <thead class="thead-dark">
-                <tr>
-                    <th scope="col">ID</th>
-                    <th scope="col">Name</th>
-                    <th scope="col">Position</th>
-                    <th scope="col">Profile Picture</th>
-                    <th scope="col">Priority</th>
-                    <th scope="col">Active</th>
-                    <th scope="col">Action</th>
-                </tr>
-            </thead>
-            <tbody id="member-table-body">
-                <tr id="loader">
-                    <td>
-                        <div class="loader"></div>
-                    </td>
-                    <td>
-                        <div class="loader"></div>
-                    </td>
-                    <td>
-                        <div class="loader"></div>
-                    </td>
-                    <td>
-                        <div class="loader"></div>
-                    </td>
-                    <td>
-                        <div class="loader"></div>
-                    </td>
-                    <td>
-                        <div class="loader"></div>
-                    </td>
-                    <td>
-                        <div class="loader"></div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
+    
+        <div class="tab-container tab-pane fade" id="event">
+            <div class="event-title mb-3">
+                <h1>Events Details</h1>
+            </div>
+            <button class="btn btn-primary mb-3" data-toggle="modal" data-target="#event-modal" onclick="addEvent()">Add Event</button>
 
-    <div id="event-tab" class="container" style="display:none;">
-        <div class="event-title mb-3">
-            <h1>Events Details</h1>
+            <div class="alert alert-danger alert-dismissible fade show" role="alert" id="event-deleted-alert" style="display:none;">
+                The event is successfully deleted !
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <div class="alert alert-success alert-dismissible fade show" role="alert" id="event-added-alert" style="display:none;">
+                The event is successfully added !
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <div class="alert alert-success alert-dismissible fade show" role="alert" id="event-edited-alert" style="display:none;">
+                The event is successfully edited !
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <div class="alert alert-danger delete-alert" role="alert">
+                The delete request is processing! Please do not refresh the page
+                <div class="spinner-border text-danger ml-2" role="status" style="height: 20px; width: 20px; font-size: 15px;"></div>
+            </div>
+
+            <div class="backstage-table-container">
+                <table class="table" id="event-table">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th scope="col">Title</th>
+                            <th scope="col">Start</th>
+                            <th scope="col">End</th>
+                            <th scope="col">Platform</th>
+                            <th scope="col">Type</th>
+                            <th scope="col">Active</th>
+                            <th scope="col">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="event-table-body">
+                        <tr id="loader">
+                            <td>
+                                <div class="loader"></div>
+                            </td>
+                            <td>
+                                <div class="loader"></div>
+                            </td>
+                            <td>
+                                <div class="loader"></div>
+                            </td>
+                            <td>
+                                <div class="loader"></div>
+                            </td>
+                            <td>
+                                <div class="loader"></div>
+                            </td>
+                            <td>
+                                <div class="loader"></div>
+                            </td>
+                            <td>
+                                <div class="loader"></div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
         </div>
-        <button class="btn btn-primary mb-3" onclick="EventModalAdd()">Add Event</button>
-        <table class="table" id="event-table">
-            <thead class="thead-dark">
-                <tr>
-                    <th scope="col">Title</th>
-                    <th scope="col">Start</th>
-                    <th scope="col">End</th>
-                    <th scope="col">Platform</th>
-                    <th scope="col">Type</th>
-                    <th scope="col">Active</th>
-                    <th scope="col">Action</th>
-                </tr>
-            </thead>
-            <tbody id="event-table-body">
-                <tr id="loader">
-                    <td>
-                        <div class="loader"></div>
-                    </td>
-                    <td>
-                        <div class="loader"></div>
-                    </td>
-                    <td>
-                        <div class="loader"></div>
-                    </td>
-                    <td>
-                        <div class="loader"></div>
-                    </td>
-                    <td>
-                        <div class="loader"></div>
-                    </td>
-                    <td>
-                        <div class="loader"></div>
-                    </td>
-                    <td>
-                        <div class="loader"></div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
     </div>
+    
 
 </body>
 
 </html>
+
+<script>
+    displayRecord();
+    displayMember();
+    displayEvent();
+    actionAlertDisplay();
+
+    function changeNav(element){
+
+        if(element == "contact-tab"){
+            $("#member-tab").removeClass("active");
+            $("#event-tab").removeClass("active");
+        }
+        else if (element == "member-tab"){
+            $("#contact-tab").removeClass("active");
+            $("#event-tab").removeClass("active");
+        }
+        else{
+            $("#member-tab").removeClass("active");
+            $("#contact-tab").removeClass("active");
+        }
+    
+    }
+</script>
+
+<!-- Google Calendar API -->
+<script type="text/javascript">
+    // Client ID and API key from the Developer Console
+    var CLIENT_ID = '490280236841-6c1eojdbcfsp66t9oh2raanvmq0gv4lo.apps.googleusercontent.com';
+    var API_KEY = 'AIzaSyCPBjy-1YPX2NTBkS9NSWPVdBJXFlhce-g';
+
+    // Array of API discovery doc URLs for APIs used by the quickstart
+    var DISCOVERY_DOCS = ["https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest"];
+
+    // Authorization scopes required by the API; multiple scopes can be
+    // included, separated by spaces.
+    var SCOPES = "https://www.googleapis.com/auth/calendar";
+
+    var authorizeButton = document.getElementById('authorize_button');
+    var synchronized = false;
+
+    /**
+     *  On load, called to load the auth2 library and API client library.
+     */
+    function handleClientLoad() {
+        gapi.load('client:auth2', initClient);
+    }
+
+    /**
+     *  Initializes the API client library and sets up sign-in state
+     *  listeners.
+     */
+    function initClient() {
+        gapi.client.init({
+            apiKey: API_KEY,
+            clientId: CLIENT_ID,
+            discoveryDocs: DISCOVERY_DOCS,
+            scope: SCOPES
+        }).then(function () {
+            // Listen for sign-in state changes.
+            gapi.auth2.getAuthInstance().isSignedIn.listen(updateSigninStatus);
+
+            // Handle the initial sign-in state.
+            updateSigninStatus(gapi.auth2.getAuthInstance().isSignedIn.get());
+            authorizeButton.onclick = handleAuthClick;
+        }, function(error) {
+            appendPre(JSON.stringify(error, null, 2));
+        });
+    }
+
+    /**
+     *  Called when the signed in status changes, to update the UI
+     *  appropriately. After a sign-in, the API is called.
+     */
+    function updateSigninStatus(isSignedIn) {
+        if (isSignedIn) {
+            createGoogleCalendarEvent();
+        } 
+    }
+
+    /**
+     *  Sign in the user upon button click.
+     */
+    function handleAuthClick(event) {
+        if(eventFormValidation()){
+            gapi.auth2.getAuthInstance().signIn();
+        }
+        else{
+            alert("Please fill in all the event details first!");
+        }
+        
+    }
+
+    /**
+     *  Sign out the user upon button click.
+     */
+    function handleSignoutClick(event) {
+        gapi.auth2.getAuthInstance().signOut();
+    }
+
+    /**
+     * Append a pre element to the body containing the given message
+     * as its text node. Used to display the results of the API call.
+     *
+     * @param {string} message Text to be placed in pre element.
+     */
+    function appendPre(message) {
+        alert(message + '\n');
+        console.log(message)
+    }
+
+</script>
+
+<script async defer src="https://apis.google.com/js/api.js"
+    onload="this.onload=function(){};handleClientLoad()"
+    onreadystatechange="if (this.readyState === 'complete') this.onload()">
+</script>

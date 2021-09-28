@@ -118,6 +118,22 @@ function formSubmit() {
             // Set Cookies
             setMessageCookie("dsc-contact", "sent", 1);
 
+            $.ajax({
+                url: "https://formsubmit.co/ajax/gdsc.taruc@gmail.com",
+                method: "POST",
+                data: {
+                    First_Name: first_name ,
+                    Last_Name : last_name,
+                    Email : email,
+                    Message: message
+                },
+                dataType: "json"
+            }).then(()=>{
+                console.log("Form successfully submitted")
+            }).catch((error)=>{
+                console.log("Error during form submission: " + error)
+            });
+
             alert("Form submitted we will approach you shortly!");
 
             // Remove loader
@@ -218,73 +234,6 @@ function enterSignIn() {
     }
 }
 
-function displayRecord() {
-    record_container = document.getElementById("record-body");
-    record_count = 0;
-    loader = document.getElementById("loader");
-
-    // Record array
-    two_dimension_record_array = [];
-    record_array = [];
-
-
-    // Retrieve Data from the database
-    firebase.database().ref("contact_details").once("value", function(snapshot) {
-        snapshot.forEach(function(childSnapshot) {
-
-            // Insert record into the array
-            record_array.push(childSnapshot.val().Date);
-            record_array.push(childSnapshot.val().FirstName);
-            record_array.push(childSnapshot.val().LastName);
-            record_array.push(childSnapshot.val().Email);
-            record_array.push(childSnapshot.val().Message);
-
-            // Insert record into the 2d array
-            two_dimension_record_array.push(record_array);
-
-            // Clear the 1d array
-            record_array = [];
-
-            // Add record count
-            record_count++;
-        });
-    }).then(function() {
-
-        if (record_count === 0) {
-            // Remove loader
-            document.getElementById("loader").style.display = "none";
-
-            // Display No Record Message
-            record_container.innerHTML = record_container.innerHTML +
-                "<tr>" +
-                "<td class='text-danger'>No Record Found!</td>" +
-                "<td></td>" +
-                "<td></td>" +
-                "<td></td>" +
-                "<td></td>" +
-                "</tr>";
-        } else {
-            // Reverse the array to show the latest record
-            two_dimension_record_array.reverse();
-
-            // Print record
-            for (row = 0; row < two_dimension_record_array.length; row++) {
-                record_container.innerHTML = record_container.innerHTML +
-                    "<tr>" +
-                    "<td>" + two_dimension_record_array[row][0] + "</td>" +
-                    "<td>" + two_dimension_record_array[row][1] + "</td>" +
-                    "<td>" + two_dimension_record_array[row][2] + "</td>" +
-                    "<td>" + two_dimension_record_array[row][3] + "</td>" +
-                    "<td>" + two_dimension_record_array[row][4] + "</td>" +
-                    "</tr>";
-            }
-
-            // Remove loader
-            document.getElementById("loader").style.display = "none";
-        }
-    });
-}
-
 function logout() {
     firebase.auth().signOut();
 }
@@ -321,4 +270,26 @@ function checkMessageCookie() {
     } else {
         return false
     }
+}
+
+function dateFormatter(timestamp){
+    const date = new Date(timestamp);
+
+    return date.getDate() + "/" + (date.getMonth() + 1) + "/" + date.getFullYear() + ", " + checkTime(date.getHours()) + ":" + checkTime(date.getMinutes());
+}
+
+function websiteLoading(){
+    var loading_modal = document.getElementById("modal-loading");
+
+    //Remove loading gif after 5 seconds
+    setTimeout(function(){
+        loading_modal.style.display = "none";
+    }, 4000);
+
+}
+
+function displayLoading(){
+    var loading_img = document.getElementById("loading-img");
+
+    loading_img.src = "images/loading.gif";
 }

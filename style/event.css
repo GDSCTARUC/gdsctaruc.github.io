@@ -225,7 +225,6 @@
     overflow-y: hidden;
 }
 
-/* .upcoming-card-title{
-    max-height: 70px;
-    min-height: 70px;
-} */
+.card-body{
+    border-top: 1px solid rgb(214, 214, 214);
+}
