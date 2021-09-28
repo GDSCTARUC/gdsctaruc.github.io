@@ -15,7 +15,7 @@ function displayEvent() {
             "<td>" + backstageDateFormatter(doc.data().start) + "</td>" +
             "<td>" + backstageDateFormatter(doc.data().end) + "</td>" +
             "<td>" + doc.data().platform +"</td>" +
-            "<td>" + doc.data().type + "</td>" +
+            "<td>" + getEventType(doc.data().type) + "</td>" +
             "<td>" + doc.data().active + "</td>" +
             "<td> <button class='btn btn-success' onclick='editEvent(" + '"' + doc.id + '"' + ")' data-toggle='modal' data-target='#event-modal'>Edit</button>" +
                 "<button class='btn btn-danger' onclick='deleteEvent(" + '"' + doc.id + '"' + ")'>Delete</button>" + 

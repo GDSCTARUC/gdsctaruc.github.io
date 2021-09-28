@@ -287,3 +287,15 @@ function websiteLoading(){
     }, 4000);
 
 }
+
+function getEventType(type){
+    if(type == 1){
+        return "Workshop";
+    }
+    else if(type == 2){
+        return "Talk";
+    }
+    else{
+        return "Event";
+    }
+}

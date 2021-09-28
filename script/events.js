@@ -16,8 +16,8 @@ function printEvent(){
                     '</div>'+
             
                     '<div class="next-event-detail col-sm-12 col-md-6">'+
-                        '<h4 class="upc-event-title">Android Study Jam<span class="sup-new">NEW</span></h4>'+
-                        '<div class="e-badge-container"><span id="e-badge" class="badge badge-secondary">WORKSHOP</span></div>'+
+                        '<h4 class="upc-event-title">' + doc.data().title +'<span class="sup-new">NEW</span></h4>'+
+                        '<div class="e-badge-container"><span id="e-badge" class="badge badge-secondary">' + getEventType(doc.data().type) + '</span></div>'+
                         '<p class="font-weight-light">' + doc.data().desc + '</p>'+
                         '<div class="next-event-short-details">'+
                             '<div class="row">'+
