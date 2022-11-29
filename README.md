@@ -1,2 +1,2 @@
 # gdsctaruc.github.io
-Welcome to DSC TARUC page! 
+Welcome to DSC TARUMT page! 
