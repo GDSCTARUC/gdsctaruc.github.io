@@ -1,2 +1,2 @@
-# gdsctaruc.github.io
+# gdsctarumt.github.io
 Welcome to DSC TARUMT page! 
