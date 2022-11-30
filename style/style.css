@@ -89,6 +89,9 @@ body {
     transform: translate(-50%, -50%);
     text-align: center;
     width: 100%;
+}
+
+.text-light {
     color: black;
 }
 
