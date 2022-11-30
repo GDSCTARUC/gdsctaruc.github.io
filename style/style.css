@@ -91,10 +91,6 @@ body {
     width: 100%;
 }
 
-.dsc-banner-text.text-light {
-    color: black;
-}
-
 #body-banner {
     opacity: 0;
     max-width: 900px;
